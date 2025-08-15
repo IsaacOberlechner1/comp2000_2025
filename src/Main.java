@@ -17,10 +17,10 @@ public class Main extends JFrame {
 
       @Override
       public void paint(Graphics g) {
-	g.setColor(java.awt.Color.BLACK);
-	g.drawRect(10, 10, 700, 700);
+        g.setColor(java.awt.Color.BLACK);
+        g.drawRect(10, 10, 700, 700);
+        }
       }
-    }
 
     private Main() {
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
