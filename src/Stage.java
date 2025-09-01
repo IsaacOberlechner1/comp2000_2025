@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class Stage {
   Grid grid;
-  List<Actor> actors;
+  List<Actor> actors; //
 
   public Stage() {
     grid = new Grid();
