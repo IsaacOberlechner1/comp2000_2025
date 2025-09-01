@@ -14,7 +14,7 @@ public class Grid {
   }
 
   private char colToLabel(int col) {
-    return (char) (col + Character.valueOf('A'));
+    return (char) (col + Character.valueOf('A')); //
   }
 
   private int labelToCol(char col) {
