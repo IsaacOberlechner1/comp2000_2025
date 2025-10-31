@@ -13,11 +13,9 @@ public class Main extends JFrame {
     public static void main(String[] args) throws Exception {
       // Main window = new Main();
       // window.run();
-      Client client = new Client();
-      List<String> events = client.pullEvent();
-      List<Float> sttengths = client.pullStrength();
-      System.out.println("Events: " + events + ", Strengths: " + sttengths);
-      System.out.println("Sublime");
+      Stage s = new Stage();
+      List<Cell> cell = s.pullCell();
+      System.out.println(cell);
     }
 
     class Canvas extends JPanel implements MouseListener {
