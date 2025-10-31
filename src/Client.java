@@ -21,11 +21,12 @@ public class Client {
                 .thenAccept(inputStream -> { // partition the stream
                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) { // read the input stream and turn it into characters
                         reader.lines().map( s -> s.split(" ")).forEach( ( pieces -> {
-                            System.out.println("New Weather Event:"); // print out the line
-                            System.out.println("    Time: " + pieces[0]);
-                            System.out.println("    Type: " + pieces[1] + " with a strength of " + pieces[4]);
-                            System.out.println("    Location: (" + pieces[2] + ", " + pieces[3] + ")");
-                            System.out.println("");
+                            // System.out.println("New Weather Event:"); // print out the line
+                            // System.out.println("    Time: " + pieces[0]);
+                            // System.out.println("    Type: " + pieces[1] + " with a strength of " + pieces[4]);
+                            // System.out.println("    Location: (" + pieces[2] + ", " + pieces[3] + ")");
+                            // System.out.println("");
+                            
 
                         }) );
                     } catch (IOException e) {
