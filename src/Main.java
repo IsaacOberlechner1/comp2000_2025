@@ -1,20 +1,23 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 public class Main extends JFrame {
     public static void main(String[] args) throws Exception {
-      Main window = new Main();
-      window.run();
+      // Main window = new Main();
+      // window.run();
+      Client client = new Client();
+      List<String> events = client.pullEvent();
+      List<Float> sttengths = client.pullStrength();
+      System.out.println("Events: " + events + ", Strengths: " + sttengths);
+      System.out.println("Sublime");
     }
 
     class Canvas extends JPanel implements MouseListener {
