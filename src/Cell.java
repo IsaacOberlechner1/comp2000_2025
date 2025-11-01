@@ -3,10 +3,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class Cell extends Rectangle implements Observer {
+public class Cell extends Rectangle {
   static int size = 35;
   char col;
   int row;
+  String currentWeather;
+  float weatherStrength;
 
   public Cell(char inCol, int inRow, int x, int y) {
     super(x, y, size, size);

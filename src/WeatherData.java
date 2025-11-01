@@ -1,22 +1,13 @@
-import java.util.ArrayList;
-import java.util.List;
+public class WeatherData {
+    int time;
+    String event;
+    Cell location;
+    float strength;
 
-public class WeatherData implements Subject {
-    List<Observer> observers = new ArrayList<>();
-    private int time;
-    private String event;
-
-    public void registerObserver(Observer o){
-        observers.add(o);
-    }
-
-    public void removeObserver(Observer o) {
-        observers.remove(o);
-    }
-
-    public void notifyObservers(){
-        for(Observer observer: observers) {
-            observer.update();
-        }
+    public WeatherData(int time, String event, Cell location, float strength) {
+        this.time = time;
+        this.event = event;
+        this.location = location;
+        this.strength = strength;
     }
 }

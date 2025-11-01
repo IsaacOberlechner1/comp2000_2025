@@ -14,11 +14,10 @@ public class Main extends JFrame {
       // window.run();
       Grid g = new Grid();
 
-      WeatherData weatherData = new WeatherData();
+      WeatherStation weatherStation = new WeatherStation();
 
-      weatherData.registerObserver(g);
-      weatherData.notifyObservers();
-
+      weatherStation.registerObserver(g);
+      weatherStation.pullStream();
 
     }
 

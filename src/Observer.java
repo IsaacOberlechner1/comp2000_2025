@@ -1,3 +1,4 @@
+
 public interface Observer {
-    public void update();
+    public void update(WeatherData data);
 }
