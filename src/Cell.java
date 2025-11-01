@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class Cell extends Rectangle {
+public class Cell extends Rectangle implements Observer {
   static int size = 35;
   char col;
   int row;
@@ -40,6 +40,10 @@ public class Cell extends Rectangle {
 
   public int aboveComparison(Cell c) {
     return Integer.compare(row, c.row);
+  }
+
+  public void update() {
+    System.out.println("Updated");
   }
 }
 

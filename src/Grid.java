@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public class Grid {
+public class Grid implements Observer {
   Cell[][] cells = new Cell[20][20];
   
   public Grid() {
@@ -79,5 +79,9 @@ public class Grid {
     for(Cell c: cells) {
       g.fillRect(c.x+2, c.y+2, c.width-4, c.height-4);
     }
+  }
+
+  public void update() {
+    System.out.println("YOOOOOO");
   }
 }

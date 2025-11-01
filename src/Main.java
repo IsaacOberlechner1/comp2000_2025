@@ -13,6 +13,13 @@ public class Main extends JFrame {
       // Main window = new Main();
       // window.run();
       Grid g = new Grid();
+
+      WeatherData weatherData = new WeatherData();
+
+      weatherData.registerObserver(g);
+      weatherData.notifyObservers();
+
+
     }
 
     class Canvas extends JPanel implements MouseListener {
