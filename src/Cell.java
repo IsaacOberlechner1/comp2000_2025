@@ -9,18 +9,20 @@ public class Cell extends Rectangle {
   int row;
   String currentWeather;
   float weatherStrength;
+  Color cellColour;
 
   public Cell(char inCol, int inRow, int x, int y) {
     super(x, y, size, size);
     col = inCol;
     row = inRow;
+    cellColour = Color.WHITE;
   }
 
   public void paint(Graphics g, Point mousePos) {
     if(contains(mousePos)) {
       g.setColor(Color.GRAY);
     } else {
-      g.setColor(Color.WHITE);
+      g.setColor(cellColour);
     }
     g.fillRect(x, y, size, size);
     g.setColor(Color.BLACK);
@@ -42,10 +44,6 @@ public class Cell extends Rectangle {
 
   public int aboveComparison(Cell c) {
     return Integer.compare(row, c.row);
-  }
-
-  public void update() {
-    System.out.println("Updated");
   }
 }
 

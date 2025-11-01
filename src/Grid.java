@@ -81,10 +81,9 @@ public class Grid implements Observer {
     }
   }
 
-  public void update(WeatherData data) {
+  public void update(WeatherData data, Color weatherColour) {
     cellAtColRow(data.location.col, data.location.row).get().currentWeather = data.event;
     cellAtColRow(data.location.col, data.location.row).get().weatherStrength = data.strength;
-
-    
+    cellAtColRow(data.location.col, data.location.row).get().cellColour = weatherColour;
   }
 }

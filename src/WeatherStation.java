@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,13 +22,13 @@ public class WeatherStation implements Subject {
         observers.remove(o);
     }
 
-    public void notifyObservers(WeatherData data){
+    public void notifyObservers(WeatherData data, Color weatherColour){
         for(Observer observer: observers) {
-            observer.update(data);
+            observer.update(data, weatherColour);
         }
     }
 
-    public void parseData(String[] stream) {
+    public void parseData(String[] stream, Color weatherColour) {
 
         int time = Integer.parseInt(stream[0]);
         int locX = Integer.parseInt(stream[2]);
@@ -41,8 +42,8 @@ public class WeatherStation implements Subject {
         float strength = Float.parseFloat(stream[4]);
 
         WeatherData data = new WeatherData(time, stream[1], locCell, strength);
-
-        notifyObservers(data);
+        System.out.println("Step 2. Colour is " + weatherColour);
+        notifyObservers(data, weatherColour);
     }
 
     public void pullStream() {
@@ -59,24 +60,27 @@ public class WeatherStation implements Subject {
                     reader.lines()
                         .map( s -> s.split(" "))
                         .filter(pieces -> !pieces[3].contains("-") && !pieces[2].contains("-"))
+                        .limit(100)
+                        
                         .forEach( ( pieces -> {
-                            if(Float.parseFloat(pieces[4]) > 0.3){
+                            if(Float.parseFloat(pieces[4]) > 0.1){
                                 if(pieces[1].equals("rain")){
-                                    parseData(pieces);
+                                    //System.out.println("Step 1. rain coming");
+                                    parseData(pieces, Color.BLUE.darker());
                                 } else if (pieces[1].equals("windy") || pieces[1].equals("windx")) {
-                                    parseData(pieces);
+                                    //System.out.println("Step 1. wind coming");
+                                    parseData(pieces, Color.GRAY.darker());
                                 } else if (pieces[1].equals("temp")) {
-                                    parseData(pieces);
+                                    //System.out.println("Step 1. heat coming");
+                                    parseData(pieces, Color.ORANGE.darker());
                                 } else {
                                     // do nothing
                                 }
-                                System.out.println("");
-                                }
+                            }
                         }) );
                     } catch (IOException e) {
                         System.err.println("Error reading Server Side Event (SSE) stream: " + e.getMessage()); // if we have issues with reading the data, throw an exception
                     }
-                })
-                .join(); // Wait for the async operation to complete
+                });
     }
 }
