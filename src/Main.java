@@ -13,7 +13,6 @@ public class Main extends JFrame {
       // Main window = new Main();
       // window.run();
       Grid g = new Grid();
-      g.cellAtColRow('G', 5).get().weatherEvent.event();
     }
 
     class Canvas extends JPanel implements MouseListener {
