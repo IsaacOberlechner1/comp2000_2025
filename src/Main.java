@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -13,10 +12,8 @@ public class Main extends JFrame {
     public static void main(String[] args) throws Exception {
       // Main window = new Main();
       // window.run();
-      Stage s = new Stage();
-      List<Cell> cell = s.pullCell();
-      List<Float> strength = s.pullStrength();
-      System.out.println(cell);
+      Grid g = new Grid();
+      g.cellAtColRow('G', 5).get().weatherEvent.event();
     }
 
     class Canvas extends JPanel implements MouseListener {

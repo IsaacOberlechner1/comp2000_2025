@@ -7,10 +7,7 @@ public class Cell extends Rectangle {
   static int size = 35;
   char col;
   int row;
-  float rain;
-  float windX;
-  float windY;
-  float temp;
+  WeatherEvent weatherEvent;
 
   public Cell(char inCol, int inRow, int x, int y) {
     super(x, y, size, size);
@@ -46,3 +43,4 @@ public class Cell extends Rectangle {
     return Integer.compare(row, c.row);
   }
 }
+
