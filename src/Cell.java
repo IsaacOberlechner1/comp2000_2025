@@ -7,6 +7,10 @@ public class Cell extends Rectangle {
   static int size = 35;
   char col;
   int row;
+  float rain;
+  float windX;
+  float windY;
+  float temp;
 
   public Cell(char inCol, int inRow, int x, int y) {
     super(x, y, size, size);

@@ -15,6 +15,7 @@ public class Main extends JFrame {
       // window.run();
       Stage s = new Stage();
       List<Cell> cell = s.pullCell();
+      List<Float> strength = s.pullStrength();
       System.out.println(cell);
     }
 
