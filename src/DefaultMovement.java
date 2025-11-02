@@ -1,0 +1,19 @@
+public class DefaultMovement implements MovementState {
+    public void defaultMovement(Actor a) {
+        // nothing - already in default
+    }
+
+    public void halvedMovement(Actor a) { 
+        a.moves = a.halfMoves;
+        a.setState(new HalvedMovement());
+    }
+
+    public void doubleMovement(Actor a) {
+        a.moves = a.doubleMoves;
+        a.setState(new DoubleMovement());
+    }
+
+    public String stateDetails(Actor a) {
+        return "The " + a.getClass().getName() + " is moving normally...";
+    }
+}

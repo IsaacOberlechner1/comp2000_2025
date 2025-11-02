@@ -13,8 +13,8 @@ public abstract class Actor implements Pulse {
   int doubleMoves;
   int halfMoves;
   int turns;
-  boolean altered = false;
   MoveStrategy mover;
+  private MovementState currentState;
 
   protected Actor(Cell inLoc, Color inColor, boolean isBot, int inMoves) {
     loc = inLoc;
@@ -26,6 +26,7 @@ public abstract class Actor implements Pulse {
     doubleMoves = defaultMoves * 2;
     halfMoves = defaultMoves / 2;
     turns = 1;
+    currentState = new DefaultMovement();
     setPoly();
   }
 
@@ -47,22 +48,17 @@ public abstract class Actor implements Pulse {
   public void setLocation(Cell inLoc) {
     loc = inLoc;
 
-    if(loc.currentWeather == "raining" && altered != true) {
-      moves = doubleMoves;
-      altered = true;
-      System.out.println("Moves have been doubled!" + " " + altered);
-    } else if (loc.currentWeather == "windy" && altered != true){
-      moves = doubleMoves;
-      altered = true;
-      System.out.println("Moves have been doubled!" + " " + altered);
-    } else if (loc.currentWeather == "hot" && altered != true) {
-        moves = halfMoves;
-        altered = true;
-        System.out.println("Moves have been halved!" + " " + altered);
-    } else if(loc.currentWeather == null) {
-      moves = defaultMoves;
-      altered = false;
-      System.out.println("Standard moves" + " " + altered);
+    if(loc.currentWeather == "raining" && (this.getClass().getName() == "Cat" || this.getClass().getName() == "Dog")) { // rain doubles cat and dog movement
+      currentState.doubleMovement(this);
+      System.out.println("The rain motivates you to get dry! " + this.getClass().getName() + " moves are doubled this turn"); // wind doubles bird movement
+    } else if (loc.currentWeather == "windy" && this.getClass().getName() == "Bird"){
+      currentState.doubleMovement(this);
+      System.out.println("You flow in the rhythm of the wind! Bird moves are doubled this turn"); 
+    } else if (loc.currentWeather == "hot") { // hot halves all movements
+        currentState.halvedMovement(this);
+        System.out.println("It's too hot! " + this.getClass().getName() + " moves are halved this turn.");
+    } else { // normal movement
+      currentState.defaultMovement(this);
     } 
 
     if(loc.row % 2 == 0) {
@@ -79,5 +75,13 @@ public abstract class Actor implements Pulse {
     Color.RGBtoHSB(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), hsbValues);
     hsbValues[1] = ((float) percentage) / 100.0f;
     color = Color.getHSBColor(hsbValues[0], hsbValues[1], hsbValues[2]);
+  }
+
+  public String getState(Actor a) {
+    return currentState.stateDetails(a);
+  }
+
+  public void setState(MovementState newState) {
+    currentState = newState;
   }
 }

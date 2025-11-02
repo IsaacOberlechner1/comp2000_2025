@@ -73,7 +73,7 @@ public class WeatherStation implements Subject {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) { // read the input stream and turn it into characters
                     reader.lines()
                         .map( s -> s.split(" "))
-                        .limit(100) // limit the stream by 100
+                        .limit(200) // limit the stream by 100
                         .forEach( ( pieces -> { 
                             // turn negative x & y coordinates into positive ones
                             int locationX = Integer.parseInt(pieces[2]);

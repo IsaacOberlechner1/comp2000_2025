@@ -59,6 +59,8 @@ public class Stage {
     // state display
     g.setColor(Color.DARK_GRAY);
     g.drawString(currentState.toString(), margin, yLoc);
+    g.setColor(Color.RED);
+    g.drawString(listOfPlayers.get(0).getState(listOfPlayers.get(0)), margin, yLoc+17);
     yLoc = yLoc + blockVT;
     Optional<Cell> underMouse = grid.cellAtPoint(mouseLoc);
     if(underMouse.isPresent()) {
