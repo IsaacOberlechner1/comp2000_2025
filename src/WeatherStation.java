@@ -13,7 +13,6 @@ import java.util.List;
 public class WeatherStation implements Subject {
     private List<Observer> observers = new ArrayList<>();
     private Grid placeholderGrid = new Grid();
-    private float threshold = 0.3f;
 
     public void registerObserver(Observer o){
         observers.add(o);
@@ -49,18 +48,6 @@ public class WeatherStation implements Subject {
     }
 
     public void pullStream() {
-        // String[] proxyData = {"1028352386", "rain", "5", "5", "0.45"};
-        // String[] proxyData2 = {"1028352386", "windX", "2", "15", "0.50"};
-        // String[] proxyData3 = {"1028352386", "windY", "3", "7", "0.55"};
-        // String[] proxyData4 = {"1028352386", "temp", "8", "13", "0.60"};
-        // String[] proxyData5 = {"1028352386", "temp", "5", "5", "0.55"};
-        // parseData(proxyData, Color.BLUE.darker());
-        // parseData(proxyData2, Color.GRAY.darker());
-        // parseData(proxyData3, Color.GRAY.darker());
-        // parseData(proxyData4, Color.ORANGE.darker());
-        // parseData(proxyData5, Color.ORANGE);
-
-
         HttpClient client = HttpClient.newHttpClient(); // creating a HTTP client
         HttpRequest request = HttpRequest.newBuilder() // creating a request to the server
                 .uri(URI.create("http://13.238.167.130/weather"))
@@ -89,7 +76,6 @@ public class WeatherStation implements Subject {
                             }
 
                             // send weather event if the strength is over the threshold (tunable parameter)
-                            //if(Float.parseFloat(pieces[4]) > threshold){
                                 switch (pieces[1]) {
                                     case "rain": // it's raining
                                         pieces[1] = "raining";
@@ -108,7 +94,6 @@ public class WeatherStation implements Subject {
                                     default:
                                         break;
                                 }
-                            //}
                         }) );
                     } catch (IOException e) {
                         System.err.println("Error reading Server Side Event (SSE) stream: " + e.getMessage()); // if we have issues with reading the data, throw an exception

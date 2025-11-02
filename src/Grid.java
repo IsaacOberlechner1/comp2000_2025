@@ -85,6 +85,8 @@ public class Grid implements Observer {
   public void update(WeatherData data, Color weatherColour) {
     // find the event cell in our grid
     Cell currentCell= cellAtColRow(data.location.col, data.location.row).get(); 
+
+    // create a random threhsold for each cell to allow dynamic weather
     Random rand = new Random();
     float threshold = rand.nextFloat() - 0.3f;
     

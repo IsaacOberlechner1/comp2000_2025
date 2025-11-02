@@ -14,7 +14,7 @@ public class Stage {
   GameState currentState;
   Beat beat;
 
-  WeatherStation weatherStation = new WeatherStation();
+  WeatherStation weatherStation = new WeatherStation(); // new weather station where our stream is pulled from
 
   public Stage() {
     grid = new Grid();
@@ -23,8 +23,8 @@ public class Stage {
     playerInAction = Optional.empty();
     currentState = new ChoosingActor();
     beat = new AnimationBeat();
-    weatherStation.registerObserver(grid);
-    weatherStation.pullStream();
+    weatherStation.registerObserver(grid); // register the grid as an observer
+    weatherStation.pullStream(); // pull the stream at the instantiation of the stage
   }
 
   public void addPlayer(Actor player) {
@@ -59,13 +59,18 @@ public class Stage {
     // state display
     g.setColor(Color.DARK_GRAY);
     g.drawString(currentState.toString(), margin, yLoc);
+
+    // draw the state details of the first player (i.e. cat)
     g.setColor(Color.RED);
     g.drawString(listOfPlayers.get(0).getState(listOfPlayers.get(0)), margin, yLoc+17);
+
     yLoc = yLoc + blockVT;
     Optional<Cell> underMouse = grid.cellAtPoint(mouseLoc);
     if(underMouse.isPresent()) {
       Cell hoverCell = underMouse.get();
       g.setColor(Color.DARK_GRAY);
+
+      // draw thwe coordinates and weather of the cell
       String coord = String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row);
       String weather = hoverCell.currentWeather; 
       if(hoverCell.currentWeather != null){

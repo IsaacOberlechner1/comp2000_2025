@@ -9,12 +9,12 @@ public abstract class Actor implements Pulse {
   List<Polygon> display;
   boolean bot;
   int moves;
-  int defaultMoves;
-  int doubleMoves;
-  int halfMoves;
+  int defaultMoves; // holds ourt default moves
+  int doubleMoves; // holds the value for double our moves
+  int halfMoves; // holds the value for half our moves
   int turns;
   MoveStrategy mover;
-  private MovementState currentState;
+  private MovementState currentState; // the state for our movement
 
   protected Actor(Cell inLoc, Color inColor, boolean isBot, int inMoves) {
     loc = inLoc;
@@ -26,7 +26,7 @@ public abstract class Actor implements Pulse {
     doubleMoves = defaultMoves * 2;
     halfMoves = defaultMoves / 2;
     turns = 1;
-    currentState = new DefaultMovement();
+    currentState = new DefaultMovement(); // start in default
     setPoly();
   }
 
@@ -48,15 +48,13 @@ public abstract class Actor implements Pulse {
   public void setLocation(Cell inLoc) {
     loc = inLoc;
 
+    // change the state of our movement based on the weather
     if(loc.currentWeather == "raining" && (this.getClass().getName() == "Cat" || this.getClass().getName() == "Dog")) { // rain doubles cat and dog movement
       currentState.doubleMovement(this);
-      System.out.println("The rain motivates you to get dry! " + this.getClass().getName() + " moves are doubled this turn"); // wind doubles bird movement
-    } else if (loc.currentWeather == "windy" && this.getClass().getName() == "Bird"){
+    } else if (loc.currentWeather == "windy" && this.getClass().getName() == "Bird"){ // wind doubles bird movement
       currentState.doubleMovement(this);
-      System.out.println("You flow in the rhythm of the wind! Bird moves are doubled this turn"); 
-    } else if (loc.currentWeather == "hot") { // hot halves all movements
-        currentState.halvedMovement(this);
-        System.out.println("It's too hot! " + this.getClass().getName() + " moves are halved this turn.");
+    } else if (loc.currentWeather == "hot") { // hot halves all actor movements
+      currentState.halvedMovement(this);
     } else { // normal movement
       currentState.defaultMovement(this);
     } 
@@ -77,10 +75,12 @@ public abstract class Actor implements Pulse {
     color = Color.getHSBColor(hsbValues[0], hsbValues[1], hsbValues[2]);
   }
 
+  // get the current state
   public String getState(Actor a) {
     return currentState.stateDetails(a);
   }
 
+  // set the current state
   public void setState(MovementState newState) {
     currentState = newState;
   }

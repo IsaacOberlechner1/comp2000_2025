@@ -46,6 +46,7 @@ public class Cell extends Rectangle {
     return Integer.compare(row, c.row);
   }
 
+  // updates the weather
   public void weatherUpdate(String event, float strength, Color colour) {
     currentWeather = event;
     weatherStrength = strength;

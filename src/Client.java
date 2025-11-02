@@ -30,7 +30,6 @@ public class Client {
                                 Grid g = new Grid();
                                 Cell c = g.cellAtColRow(Integer.parseInt(pieces[2]), Integer.parseInt(pieces[3])).get();
 
-                                //System.out.println(pieces[1].equals("rain"));
 
                                 if(Float.parseFloat(pieces[4]) > 0.5){
                                     System.out.println("Strong weather at..." + c.col + c.row);
@@ -46,18 +45,6 @@ public class Client {
                                     }
                                     System.out.println("");
                                 }
-                                // if (pieces[1].equals("rain") && Float.parseFloat(pieces[4]) > 0.5) {
-                                //     System.out.println("It's raining heavy");
-                                // } else if ((pieces[1] == "windx" || pieces[1] == "windy"  ) && Float.parseFloat(pieces[4]) > 0.5) {
-                                //     System.out.println("High winds occuring");
-                                // } else if (pieces[1] == "temp" && Float.parseFloat(pieces[4]) > 0.5) {
-                                //     System.out.println("Heat wave");
-                                // } else {
-                                //     System.out.println(Float.parseFloat(pieces[4]) > 0.5);
-                                    // System.out.println(pieces[1].equals("windx"));
-                                    // System.out.println(pieces[1].equals("windy"));
-                                    // System.out.println(pieces[1].equals("temp"));
-                                //}
                         }) );
                     } catch (IOException e) {
                         System.err.println("Error reading Server Side Event (SSE) stream: " + e.getMessage()); // if we have issues with reading the data, throw an exception
