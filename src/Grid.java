@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 
 public class Grid implements Observer {
@@ -82,8 +83,16 @@ public class Grid implements Observer {
   }
 
   public void update(WeatherData data, Color weatherColour) {
-    cellAtColRow(data.location.col, data.location.row).get().currentWeather = data.event;
-    cellAtColRow(data.location.col, data.location.row).get().weatherStrength = data.strength;
-    cellAtColRow(data.location.col, data.location.row).get().cellColour = weatherColour;
+    // find the event cell in our grid
+    Cell currentCell= cellAtColRow(data.location.col, data.location.row).get(); 
+    Random rand = new Random();
+    float threshold = rand.nextFloat() - 0.3f;
+    
+    // if the cell in this grid has no weather event, or the strength of the passed cell is higher than the existing strength, update with a new event
+    if (currentCell.currentWeather == null || currentCell.weatherStrength < threshold) {
+      cellAtColRow(data.location.col, data.location.row).get().weatherUpdate(data.event, data.strength, weatherColour);
+    } else {
+      // do nothing - the cell already has an event and the passed one is too weak to override the existing one
+    }
   }
 }

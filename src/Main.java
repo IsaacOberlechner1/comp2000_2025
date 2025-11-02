@@ -12,6 +12,9 @@ public class Main extends JFrame {
     public static void main(String[] args) throws Exception {
       Main window = new Main();
       window.run();
+      Stage s = new Stage();
+      Actor a = new Cat(s.grid.cellAtColRow('A', 0).get(), false);
+      System.out.println(a.loc);
     }
 
     class Canvas extends JPanel implements MouseListener {

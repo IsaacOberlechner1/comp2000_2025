@@ -9,7 +9,11 @@ public abstract class Actor implements Pulse {
   List<Polygon> display;
   boolean bot;
   int moves;
+  int defaultMoves;
+  int doubleMoves;
+  int halfMoves;
   int turns;
+  boolean altered = false;
   MoveStrategy mover;
 
   protected Actor(Cell inLoc, Color inColor, boolean isBot, int inMoves) {
@@ -17,7 +21,10 @@ public abstract class Actor implements Pulse {
     baseColor = inColor;
     color = inColor;
     bot = isBot;
+    defaultMoves = inMoves;
     moves = inMoves;
+    doubleMoves = defaultMoves * 2;
+    halfMoves = defaultMoves / 2;
     turns = 1;
     setPoly();
   }
@@ -39,6 +46,25 @@ public abstract class Actor implements Pulse {
 
   public void setLocation(Cell inLoc) {
     loc = inLoc;
+
+    if(loc.currentWeather == "raining" && altered != true) {
+      moves = doubleMoves;
+      altered = true;
+      System.out.println("Moves have been doubled!" + " " + altered);
+    } else if (loc.currentWeather == "windy" && altered != true){
+      moves = doubleMoves;
+      altered = true;
+      System.out.println("Moves have been doubled!" + " " + altered);
+    } else if (loc.currentWeather == "hot" && altered != true) {
+        moves = halfMoves;
+        altered = true;
+        System.out.println("Moves have been halved!" + " " + altered);
+    } else if(loc.currentWeather == null) {
+      moves = defaultMoves;
+      altered = false;
+      System.out.println("Standard moves" + " " + altered);
+    } 
+
     if(loc.row % 2 == 0) {
       mover = new MoveRandomly();
     } else {

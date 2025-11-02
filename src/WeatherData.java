@@ -1,4 +1,5 @@
 public class WeatherData {
+    // Weather data is a custom type to allow weather data to be passed between classes together
     int time;
     String event;
     Cell location;

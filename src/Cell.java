@@ -7,9 +7,9 @@ public class Cell extends Rectangle {
   static int size = 35;
   char col;
   int row;
-  String currentWeather;
-  float weatherStrength;
-  Color cellColour;
+  String currentWeather; // the current event
+  float weatherStrength; // the strength of the current event
+  Color cellColour; // the colour of the cell - updates depending on whether an event is present
 
   public Cell(char inCol, int inRow, int x, int y) {
     super(x, y, size, size);
@@ -44,6 +44,12 @@ public class Cell extends Rectangle {
 
   public int aboveComparison(Cell c) {
     return Integer.compare(row, c.row);
+  }
+
+  public void weatherUpdate(String event, float strength, Color colour) {
+    currentWeather = event;
+    weatherStrength = strength;
+    cellColour = colour;
   }
 }
 

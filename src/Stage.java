@@ -65,7 +65,12 @@ public class Stage {
       Cell hoverCell = underMouse.get();
       g.setColor(Color.DARK_GRAY);
       String coord = String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row);
-      g.drawString(coord, margin, yLoc);
+      String weather = hoverCell.currentWeather; 
+      if(hoverCell.currentWeather != null){
+        g.drawString(coord + " (" + weather + ")", margin, yLoc);
+      } else {
+        g.drawString(coord + " (clear)", margin, yLoc);
+      }    
     }
 
     // agent display
