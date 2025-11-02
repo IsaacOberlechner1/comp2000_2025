@@ -54,7 +54,7 @@ public abstract class Actor implements Pulse {
     } else if (loc.currentWeather == "windy" && this.getClass().getName() == "Bird"){ // wind doubles bird movement
       currentState.doubleMovement(this);
     } else if (loc.currentWeather == "hot") { // hot halves all actor movements
-      currentState.halvedMovement(this);
+        currentState.halvedMovement(this);
     } else { // normal movement
       currentState.defaultMovement(this);
     } 

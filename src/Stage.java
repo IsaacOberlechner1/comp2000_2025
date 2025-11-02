@@ -60,7 +60,7 @@ public class Stage {
     g.setColor(Color.DARK_GRAY);
     g.drawString(currentState.toString(), margin, yLoc);
 
-    // draw the state details of the first player (i.e. cat)
+    // draw the state details of the first player (i.e.)
     g.setColor(Color.RED);
     g.drawString(listOfPlayers.get(0).getState(listOfPlayers.get(0)), margin, yLoc+17);
 
